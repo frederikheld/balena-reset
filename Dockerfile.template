@@ -1,0 +1,12 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-run
+
+ENV GPIO_RESET_IN 14
+ENV GPIO_ACK_OUT 3
+
+RUN install_packages dbus network-manager
+
+WORKDIR /app
+
+COPY reset.sh .
+
+CMD ["/bin/sh", "-c", "sh reset.sh"]
