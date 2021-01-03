@@ -58,9 +58,11 @@ counter=0
 for line in $uuids
 do
     echo "Deleting $line" | tee $SERIAL_OUT
-    nmcli connection delete $line
+    nmcli connection delete $line # see IMPORTANT NOTE below
     counter=$((counter+1))
 done
+
+# IMPORTANT NOTE: If you debug this script on your computer, comment out this line! Otherwise it will delete all your stored WiFi connections which is most probably not what you want!
 
 plural_suffix=""
 if [ $counter -gt 1 ]
