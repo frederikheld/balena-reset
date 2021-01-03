@@ -1,10 +1,10 @@
-# Reset
+# Balena Reset
 
 This service is intended for Raspberry Pi devices (tested with Raspberry Pi 4) running [Balena OS](https://www.balena.io/os/). If the user presses the reset button, it will delete all stored WiFi connections. It is an addition to [Balena's `wifi-connect` service](https://github.com/balena-io/wifi-connect), which is lacking this functionality.
 
 ## Why?
 
-If the Balena device does not connect to the user's WiFi anymore (e.g. because it was misconfigured or the configured WiFi is not within reach), the user wants to configure a new WiFi. This can be done with the `wifi-connect` service, but in order for this service to come up and open the captive portal, all WiFi connections have to be deleted first. This is what the `reset` service does.
+If the Balena device does not connect to the user's WiFi anymore (e.g. because it was misconfigured or the configured WiFi is not within reach), the user wants to configure a new WiFi. This can be done with the `wifi-connect` service, but in order for this service to come up and open the captive portal, all WiFi connections have to be deleted first. This is what the `balena-reset` service does.
 
 ## How?
 
@@ -31,7 +31,7 @@ You can integrate this service into your Balena multi-container setup by adding 
 ```
 services:
     build:
-      context: ./reset
+      context: ./balena-reset
     network_mode: "host"
     labels:
       io.balena.features.dbus: '1'
@@ -48,7 +48,7 @@ services:
     restart: no
 ```
 
-This snippet assumes that the `reset` directory is in the same directory as the `docker-compose.yml` of your project, e. g. embedded as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). If you put it somewhere else, make sure, that `context` points to the actual directory of `reset`!
+This snippet assumes that the `balena-reset` directory is in the same directory as the `docker-compose.yml` of your project, e. g. embedded as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). If you put it somewhere else, make sure, that `context` points to the actual directory of `balena-reset`!
 
 You can change the GPIO pins to whatever pins you want. Be aware, that those values do not reflect the pin numbers of the GPIO pin header, but the internal numbering of the GPIO connectors of the processor. Please refer to the [RasPi Docs](https://www.raspberrypi.org/documentation/usage/gpio/) for more information on this topic.
 
