@@ -30,6 +30,7 @@ You can integrate this service into your Balena multi-container setup by adding 
 
 ```
 services:
+  reset:
     build:
       context: ./balena-reset
     network_mode: "host"
